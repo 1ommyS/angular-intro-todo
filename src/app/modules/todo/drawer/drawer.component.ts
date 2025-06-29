@@ -28,6 +28,7 @@ import CreateTodoRequest from '../interfaces/CreateTodoRequest';
 import {catchError, EMPTY, tap} from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import Todo from '../interfaces/Todo';
+import CreateTodoResponse from '../interfaces/CreateTodoResponse';
 
 @Component({
   standalone: true,
@@ -92,8 +93,8 @@ export default class DrawerComponent {
     const payload: CreateTodoRequest = this.form.value as CreateTodoRequest;
 
     this.create(payload).pipe(
-      tap(() => {
-        this.showNotification('Задача успешно создана');
+      tap((response: CreateTodoResponse) => {
+        this.showNotification(response.message);
         this.open.set(false)
         this.todosResource().reload()
       }),
