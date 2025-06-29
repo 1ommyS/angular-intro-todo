@@ -1,0 +1,104 @@
+<tui-drawer *tuiPopup="open()">
+  <header>
+    <h2 tuiHeader>
+      <div tuiTitle>
+        <span tuiCaption>Создать задачу</span>
+      </div>
+
+      <div tuiAccessories>
+
+        <button
+          appearance="icon"
+          iconStart="@tui.x"
+          tuiIconButton
+          type="button"
+          (click)="open.set(false)"
+        >
+          Закрыть
+        </button>
+      </div>
+    </h2>
+  </header>
+
+  <form tuiForm [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label tuiLabel>Заголовок</label>
+      <tui-textfield>
+        <textarea
+          formControlName="title"
+          placeholder="Введите название задачи"
+          tuiTextarea
+        ></textarea>
+      </tui-textfield>
+
+      @if (form.get("title")!.hasError("required")) {
+        <tui-error>Заголовок обязателен</tui-error>
+      }
+    </div>
+
+    <div>
+      <label tuiLabel>Описание</label>
+      <tui-textfield>
+             <textarea
+               formControlName="description"
+               placeholder="Подробнее о задаче"
+               tuiTextarea
+             ></textarea>
+      </tui-textfield>
+
+      @if (form.get('description')!.hasError('required')) {
+        <tui-error>
+          Описание обязательно
+        </tui-error>
+      }
+    </div>
+
+    <div>
+      <label tuiLabel>Статус</label>
+      <tui-textfield>
+        <textarea
+          formControlName="status"
+          placeholder="Выберите статус"
+          tuiTextarea
+        ></textarea>
+      </tui-textfield>
+
+      @if (form.get('status')!.hasError('required')) {
+        <tui-error>
+          Статус обязателен
+        </tui-error>
+      }
+    </div>
+    <div>
+      <label tuiLabel>Категория</label>
+      <tui-textfield>
+        <textarea
+          formControlName="category"
+          placeholder="Выберите категорию"
+          tuiTextarea
+        ></textarea>
+      </tui-textfield>
+
+      @if (form.get('category')!.hasError('required')) {
+        <tui-error>
+          Категория обязательна
+        </tui-error>
+      }
+    </div>
+
+    <button
+      size="m"
+      tuiButton
+      type="submit"
+      appearance="primary-destructive"
+      [style.margin-inline-end]="'auto'"
+      [disabled]="form.invalid"
+    >
+      Создать
+    </button>
+  </form>
+
+  <footer>
+
+  </footer>
+</tui-drawer>

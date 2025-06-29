@@ -1,0 +1,61 @@
+<button tuiButton
+        size="m"
+        class="tui-space_bottom-5"
+        (click)="open.set(true)"
+>
+  Создать форму
+</button>
+
+
+@if (todos.status() === ResourceStatus.Loading) {
+  <h1>Загружаем данные...</h1>
+} @else {
+  <div class="todo-cards">
+    @for (todo of todos.value(); track todo.id) {
+      <section
+        tuiCardLarge="compact"
+      >
+        <header tuiHeader="body-m">
+          <hgroup tuiTitle>
+            <h2>{{ todo.title }}</h2>
+            <p tuiSubtitle>
+              {{ todo.description }}
+            </p>
+          </hgroup>
+          <aside tuiAccessories>
+            <button
+              appearance="action-grayscale"
+              iconEnd="@tui.copy"
+              tuiLink
+              type="button"
+            >
+              {{ todo.id }}
+            </button>
+          </aside>
+        </header>
+        <div tuiCardRow>
+          <div tuiTitle>
+            <div tuiSubtitle>Status</div>
+            <div>
+              <tui-icon icon="@tui.clock"/>
+              {{ todo.status }}
+            </div>
+          </div>
+          <div tuiTitle>
+            <div tuiSubtitle>Category</div>
+            <div>
+              {{ todo.category }}
+              <tui-badge
+                appearance="neutral"
+                size="s"
+              >
+                Open Source
+              </tui-badge>
+            </div>
+          </div>
+        </div>
+      </section>
+    }
+  </div>
+}
+<app-drawer [open]="open()" (openChange)="open.set($event)" [todosResource]="todos"/>

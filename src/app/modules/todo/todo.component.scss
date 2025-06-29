@@ -1,0 +1,20 @@
+:host {
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  inline-size: 32rem;
+  background: var(--tui-background-base-alt);
+}
+.todo-cards {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+}
+tui-icon {
+  color: var(--tui-status-warning);
+}
+
+td:last-child {
+  color: var(--tui-text-secondary);
+}
